@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azevedo Seguros · Ageas Portugal</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0B1120;--blue:#003DA5;--blue-mid:#1A56C4;--blue-light:#EEF3FF;
+  --blue-glow:rgba(0,61,165,0.15);--gold:#C9A84C;--gold-light:#FBF5E6;--gold-mid:#B8932A;
+  --surface:#FFFFFF;--bg:#F4F6FB;--muted:#6B7A99;--border:#DDE2EF;
+  --green:#00A86B;--green-light:#E6F7F1;--red:#E0294A;
+  --r:16px;--r-sm:10px;
+  --shadow:0 2px 16px rgba(11,17,32,0.08);--shadow-md:0 8px 40px rgba(11,17,32,0.13);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;background:var(--bg);min-height:100vh;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:2rem 1rem 3rem;position:relative;overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 20% 10%, rgba(0,61,165,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(201,168,76,0.05) 0%, transparent 60%);
+  pointer-events:none;z-index:0;
+}
+.page{position:relative;z-index:1;width:100%;max-width:560px;}
+
+/* HEADER */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding:0 4px;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-mark{
+  width:40px;height:40px;
+  background:linear-gradient(135deg,var(--blue) 0%,var(--blue-mid) 100%);
+  border-radius:11px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 10px rgba(0,61,165,0.25);
+}
+.logo-mark svg{fill:#fff;width:20px;height:20px;}
+.logo-names{display:flex;flex-direction:column;}
+.logo-main{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--ink);line-height:1.1;}
+.logo-main span{color:var(--blue);}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:0.04em;}
+.badge-ageas{
+  display:flex;align-items:center;gap:5px;font-size:11px;font-weight:500;
+  color:var(--blue);background:var(--blue-light);padding:5px 10px;border-radius:100px;
+}
+
+/* CARD */
+.card{background:var(--surface);border-radius:24px;box-shadow:var(--shadow-md);overflow:hidden;border:1px solid var(--border);}
+
+/* ========== SELECTOR SCREEN ========== */
+#selectorScreen{display:block;}
+.selector-hero{
+  background:linear-gradient(135deg,var(--blue) 0%,var(--blue-mid) 100%);
+  padding:2rem 1.75rem 1.75rem;position:relative;overflow:hidden;
+}
+.selector-hero::before{
+  content:'';position:absolute;top:-50px;right:-50px;
+  width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,0.05);
+}
+.selector-hero::after{
+  content:'';position:absolute;bottom:-40px;left:-30px;
+  width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,0.04);
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.15);color:#fff;
+  font-size:11px;font-weight:500;padding:4px 12px;border-radius:100px;
+  margin-bottom:12px;letter-spacing:0.06em;
+}
+.hero-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#fff;line-height:1.2;margin-bottom:6px;}
+.hero-sub{color:rgba(255,255,255,0.7);font-size:13px;font-weight:300;line-height:1.5;}
+
+.selector-body{padding:1.75rem;}
+.selector-label{
+  font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1rem;
+}
+
+.product-grid{display:flex;flex-direction:column;gap:10px;}
+
+.product-card{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px;
+  border:1.5px solid var(--border);border-radius:14px;
+  cursor:pointer;background:var(--surface);
+  transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s,background 0.2s;
+  position:relative;overflow:hidden;
+}
+.product-card::before{
+  content:'';position:absolute;inset:0;
+  background:var(--blue-light);opacity:0;transition:opacity 0.2s;
+}
+.product-card:hover{border-color:var(--blue-mid);box-shadow:0 0 0 4px var(--blue-glow);transform:translateY(-2px);}
+.product-card:hover::before{opacity:0.4;}
+
+.product-card.vida{--accent:#7C3AED;--accent-light:#F5F3FF;--accent-glow:rgba(124,58,237,0.15);}
+.product-card.vida:hover{border-color:#7C3AED;box-shadow:0 0 0 4px var(--accent-glow);}
+.product-card.vida::before{background:var(--accent-light);}
+
+.pc-icon{
+  width:48px;height:48px;border-radius:13px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  position:relative;z-index:1;transition:transform 0.3s cubic-bezier(.175,.885,.32,1.275);
+}
+.product-card:hover .pc-icon{transform:scale(1.08) rotate(-4deg);}
+.pc-icon.blue{background:var(--blue-light);}
+.pc-icon.purple{background:#F5F3FF;}
+
+.pc-body{flex:1;position:relative;z-index:1;}
+.pc-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.pc-desc{font-size:12px;color:var(--muted);line-height:1.5;font-weight:300;}
+.pc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+.pc-tag{
+  font-size:10px;font-weight:500;padding:3px 8px;border-radius:100px;
+  letter-spacing:0.03em;
+}
+.pc-tag.blue{background:var(--blue-light);color:var(--blue);}
+.pc-tag.purple{background:#F5F3FF;color:#7C3AED;}
+.pc-tag.gold{background:var(--gold-light);color:var(--gold-mid);}
+.pc-tag.green{background:var(--green-light);color:var(--green);}
+
+.pc-arrow{
+  width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-size:14px;flex-shrink:0;
+  transition:all 0.2s;position:relative;z-index:1;align-self:center;
+}
+.product-card:hover .pc-arrow{background:var(--blue);border-color:var(--blue);color:#fff;}
+.product-card.vida:hover .pc-arrow{background:#7C3AED;border-color:#7C3AED;}
+
+.selector-footer-note{
+  margin-top:1.25rem;
+  padding:12px 14px;
+  background:var(--gold-light);border:1px solid rgba(201,168,76,0.25);border-radius:10px;
+  display:flex;align-items:center;gap:10px;
+  font-size:12px;color:var(--gold-mid);font-weight:500;line-height:1.4;
+}
+
+/* ========== SHARED FORM CHROME ========== */
+.form-screen{display:none;}
+.form-screen.active{display:block;}
+
+/* BACK TO HOME */
+.back-home{
+  display:flex;align-items:center;gap:6px;
+  background:none;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);
+  padding:8px 0;margin-bottom:1rem;
+  transition:color 0.2s;
+}
+.back-home:hover{color:var(--blue);}
+.back-home svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* Progress */
+.progress-wrap{padding:1.5rem 1.75rem 0;}
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.progress-step-label{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+.progress-pct{font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--blue);}
+.progress-track{height:5px;background:var(--blue-light);border-radius:100px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue) 0%,var(--blue-mid) 100%);border-radius:100px;transition:width 0.6s cubic-bezier(.4,0,.2,1);position:relative;}
+.progress-fill::after{content:'';position:absolute;right:0;top:0;bottom:0;width:20px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4));animation:shimmer 1.5s ease-in-out infinite;}
+@keyframes shimmer{0%,100%{opacity:0}50%{opacity:1}}
+.step-dots{display:flex;gap:6px;margin-top:10px;padding-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.dot{width:6px;height:6px;border-radius:100px;background:var(--border);transition:all 0.4s cubic-bezier(.4,0,.2,1);}
+.dot.done{background:var(--blue);opacity:0.4;}
+.dot.active{background:var(--blue);width:20px;}
+
+/* Steps */
+.step{display:none;padding:1.75rem;}
+.step.active{display:block;animation:slideIn 0.4s cubic-bezier(.4,0,.2,1);}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.q-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
+.q-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:4px;}
+.q-sub{font-size:13px;color:var(--muted);font-weight:300;margin-bottom:1.5rem;}
+
+/* Options */
+.options{display:flex;flex-direction:column;gap:8px;}
+.opt{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;
+  border:1.5px solid var(--border);border-radius:var(--r-sm);
+  cursor:pointer;transition:border-color 0.2s,background 0.2s,transform 0.2s,box-shadow 0.2s;
+  position:relative;overflow:hidden;user-select:none;background:var(--surface);
+}
+.opt::before{content:'';position:absolute;inset:0;background:var(--blue-light);opacity:0;transition:opacity 0.2s;}
+.opt:hover{border-color:var(--blue-mid);box-shadow:0 0 0 4px var(--blue-glow);}
+.opt:hover::before{opacity:0.5;}
+.opt.selected{border-color:var(--blue);background:var(--blue-light);box-shadow:0 0 0 4px var(--blue-glow);transform:translateY(-1px);animation:selectBounce 0.4s cubic-bezier(.175,.885,.32,1.275);}
+@keyframes selectBounce{0%{transform:translateY(0) scale(1)}40%{transform:translateY(-3px) scale(1.01)}70%{transform:translateY(0) scale(0.99)}100%{transform:translateY(-1px) scale(1)}}
+.opt-icon-wrap{width:40px;height:40px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;transition:background 0.2s,transform 0.3s cubic-bezier(.175,.885,.32,1.275);position:relative;z-index:1;}
+.opt.selected .opt-icon-wrap{background:var(--blue);transform:scale(1.1) rotate(-5deg);}
+.opt-content{flex:1;position:relative;z-index:1;}
+.opt-label{font-size:14px;font-weight:500;color:var(--ink);display:block;}
+.opt-desc{font-size:12px;color:var(--muted);display:block;margin-top:1px;}
+.opt-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.3s cubic-bezier(.175,.885,.32,1.275);position:relative;z-index:1;}
+.opt.selected .opt-radio{border-color:var(--blue);background:var(--blue);}
+.opt-radio-dot{width:7px;height:7px;border-radius:50%;background:#fff;transform:scale(0);transition:transform 0.3s cubic-bezier(.175,.885,.32,1.275);}
+.opt.selected .opt-radio-dot{transform:scale(1);}
+
+/* Info card (for vida plans) */
+.info-card{
+  background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:12px 14px;margin-top:8px;display:none;
+  animation:slideIn 0.3s ease;
+}
+.info-card.show{display:block;}
+.info-card-title{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:4px;}
+.info-card ul li{font-size:12px;color:var(--muted);display:flex;align-items:flex-start;gap:6px;line-height:1.4;}
+.info-card ul li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
+
+/* Ripple */
+.ripple{position:absolute;border-radius:50%;background:rgba(0,61,165,0.12);transform:scale(0);animation:rippleAnim 0.5s ease-out forwards;pointer-events:none;z-index:0;}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0;}}
+
+/* Range */
+.range-hero{text-align:center;padding:1rem 0 1.25rem;}
+.range-amount{font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-2px;transition:color 0.3s;display:inline-block;}
+.range-period{font-size:14px;color:var(--muted);font-weight:300;margin-top:4px;}
+.range-reaction{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 14px;border-radius:100px;font-size:12px;font-weight:500;transition:all 0.3s cubic-bezier(.175,.885,.32,1.275);opacity:0;transform:scale(0.8);}
+.range-reaction.show{opacity:1;transform:scale(1);}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:100px;background:var(--border);outline:none;cursor:pointer;margin:0.75rem 0;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,61,165,0.3);cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15);box-shadow:0 4px 16px rgba(0,61,165,0.4);}
+.range-limits{display:flex;justify-content:space-between;font-size:12px;font-weight:500;color:var(--muted);}
+
+/* Persons */
+.persons-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.person-row{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r-sm);animation:slideIn 0.35s cubic-bezier(.175,.885,.32,1.275);transition:border-color 0.2s;}
+.person-row:hover{border-color:var(--blue-mid);}
+.person-avatar{width:38px;height:38px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1.5px solid var(--blue);transition:transform 0.2s;}
+.person-row:hover .person-avatar{transform:scale(1.05);}
+.person-info{flex:1;}
+.person-name{font-size:13px;font-weight:500;color:var(--ink);}
+.person-age-label{font-size:11px;color:var(--muted);margin-top:1px;}
+.age-stepper{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;}
+.age-btn{width:34px;height:34px;background:var(--surface);border:none;cursor:pointer;font-size:18px;color:var(--blue);font-weight:700;display:flex;align-items:center;justify-content:center;transition:background 0.15s;flex-shrink:0;line-height:1;}
+.age-btn:hover{background:var(--blue-light);}
+.age-btn:active{background:var(--blue);color:#fff;}
+.age-val{min-width:44px;height:34px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--ink);border-left:1px solid var(--border);border-right:1px solid var(--border);transition:color 0.2s;}
+.age-val.bump{animation:bump 0.25s ease;}
+@keyframes bump{0%{transform:scale(1)}50%{transform:scale(1.25);color:var(--blue)}100%{transform:scale(1)}}
+.remove-btn{width:28px;height:28px;background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:background 0.15s,color 0.15s,transform 0.2s;flex-shrink:0;}
+.remove-btn:hover{background:#FEE2E2;color:var(--red);transform:rotate(10deg);}
+.add-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:11px;border:1.5px dashed var(--border);border-radius:var(--r-sm);background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--muted);transition:all 0.2s;}
+.add-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light);}
+.add-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;}
+
+/* Inputs */
+.input-group{margin-bottom:10px;}
+.input-group label{font-size:12px;font-weight:500;color:var(--muted);display:block;margin-bottom:5px;letter-spacing:0.03em;}
+.input-group input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--surface);outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+.input-group input:focus{border-color:var(--blue);box-shadow:0 0 0 4px var(--blue-glow);}
+.input-group input::placeholder{color:#C5CCD9;}
+.input-group input[type="date"]{color:var(--ink);cursor:pointer;}
+.input-group input[type="date"]::-webkit-calendar-picker-indicator{opacity:0.5;cursor:pointer;}
+
+.divider{height:1px;background:var(--border);margin:1.25rem 0;}
+
+/* Buttons */
+.btn-row{display:flex;gap:10px;margin-top:1.5rem;}
+.btn-back{padding:13px 18px;border:1.5px solid var(--border);border-radius:var(--r-sm);background:transparent;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;flex-shrink:0;}
+.btn-back:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-light);}
+.btn-next{flex:1;padding:13px 20px;border:none;border-radius:var(--r-sm);background:var(--blue);font-family:'Syne',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#fff;cursor:pointer;transition:all 0.2s cubic-bezier(.175,.885,.32,1.275);position:relative;overflow:hidden;}
+.btn-next::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.1) 0%,transparent 60%);pointer-events:none;}
+.btn-next:hover{background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,61,165,0.3);}
+.btn-next:active{transform:translateY(0);box-shadow:none;}
+.btn-wa{flex:1;padding:13px 20px;border:none;border-radius:var(--r-sm);background:#25D366;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#fff;cursor:pointer;transition:all 0.2s cubic-bezier(.175,.885,.32,1.275);display:flex;align-items:center;justify-content:center;gap:10px;}
+.btn-wa:hover{background:#1ebe5c;transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,211,102,0.3);}
+
+.err{font-size:12px;font-weight:500;color:var(--red);display:none;margin-top:8px;}
+.err.show{display:flex;align-items:center;gap:5px;animation:slideIn 0.2s ease;}
+
+/* TOAST */
+.toast{position:fixed;top:1.5rem;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--ink);color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;padding:10px 20px;border-radius:100px;letter-spacing:0.05em;opacity:0;pointer-events:none;z-index:999;white-space:nowrap;transition:all 0.3s cubic-bezier(.175,.885,.32,1.275);display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(11,17,32,0.2);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ABOUT SCREEN */
+.about-screen{display:none;padding:1.75rem;}
+.about-screen.active{display:block;animation:slideIn 0.4s cubic-bezier(.4,0,.2,1);}
+.about-hero{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-mid) 100%);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem;position:relative;overflow:hidden;}
+.about-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,0.06);}
+.about-hero::after{content:'';position:absolute;bottom:-30px;left:-20px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,0.04);}
+.about-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);color:#fff;font-size:11px;font-weight:500;padding:4px 10px;border-radius:100px;margin-bottom:10px;letter-spacing:0.05em;}
+.about-title{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;line-height:1.2;margin-bottom:6px;}
+.about-title span{color:var(--gold);display:block;font-size:1rem;font-weight:600;margin-top:2px;}
+.about-tagline{color:rgba(255,255,255,0.75);font-size:13px;font-weight:300;line-height:1.5;}
+.about-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:1.25rem;}
+.about-card{display:flex;align-items:flex-start;gap:12px;padding:14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);}
+.about-card-icon{width:38px;height:38px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.about-card-icon.blue{background:var(--blue-light);}
+.about-card-icon.gold{background:var(--gold-light);}
+.about-card-icon.green{background:var(--green-light);}
+.about-card-text{flex:1;}
+.about-card-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.about-card-desc{font-size:12px;color:var(--muted);line-height:1.5;font-weight:300;}
+.google-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--gold-light);border:1px solid rgba(201,168,76,0.3);border-radius:var(--r-sm);margin-bottom:1.25rem;}
+.stars{color:#F4B400;font-size:16px;letter-spacing:2px;}
+.google-sub{font-size:11px;color:var(--muted);}
+.google-logo{display:flex;align-items:center;gap:2px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.g-blue{color:#4285F4;}.g-red{color:#EA4335;}.g-yellow{color:#FBBC04;}.g-green{color:#34A853;}
+.read-confirm{background:var(--blue-light);border:1.5px solid var(--blue);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:1.25rem;display:flex;align-items:flex-start;gap:12px;}
+.read-confirm-text{font-size:13px;color:var(--blue);font-weight:500;line-height:1.5;}
+.read-confirm-text strong{font-weight:700;}
+.btn-confirm{width:100%;padding:14px;border:none;border-radius:var(--r-sm);background:var(--blue);font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s cubic-bezier(.175,.885,.32,1.275);display:flex;align-items:center;justify-content:center;gap:10px;}
+.btn-confirm:hover{background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,61,165,0.3);}
+
+/* SUCCESS */
+.success-screen{display:none;padding:2rem 1.75rem 2.5rem;text-align:center;}
+.success-screen.active{display:block;animation:popIn 0.5s cubic-bezier(.175,.885,.32,1.275);}
+@keyframes popIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.success-confetti{font-size:3rem;margin-bottom:0.75rem;display:block;animation:confettiDrop 0.6s cubic-bezier(.175,.885,.32,1.275);}
+@keyframes confettiDrop{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.2) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+.success-greeting{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--ink);line-height:1.25;margin-bottom:8px;}
+.success-greeting span{color:var(--blue);}
+.success-msg{font-size:14px;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:1.5rem;}
+.welcome-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--blue) 0%,var(--blue-mid) 100%);color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;padding:10px 20px;border-radius:100px;box-shadow:0 6px 20px rgba(0,61,165,0.25);letter-spacing:0.04em;}
+.welcome-badge span{color:var(--gold);}
+
+/* FOOTER */
+.footer{margin-top:1.25rem;padding:0 4px;display:flex;align-items:center;justify-content:center;gap:16px;}
+.footer-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);}
+.footer-item svg{width:12px;height:12px;fill:var(--muted);flex-shrink:0;}
+
+/* CONTACT METHOD */
+.contact-method-label{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0.03em;margin-bottom:10px;display:block;}
+.contact-methods{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:4px;}
+.cm-opt{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  padding:12px 8px;border:1.5px solid var(--border);border-radius:var(--r-sm);
+  cursor:pointer;transition:all 0.2s cubic-bezier(.175,.885,.32,1.275);
+  background:var(--surface);user-select:none;
+}
+.cm-opt:hover{border-color:var(--blue-mid);background:var(--blue-light);}
+.cm-opt.selected{border-color:var(--blue);background:var(--blue-light);transform:translateY(-2px);box-shadow:0 0 0 3px var(--blue-glow);animation:selectBounce 0.35s cubic-bezier(.175,.885,.32,1.275);}
+.cm-icon{font-size:22px;line-height:1;}
+.cm-label{font-size:12px;font-weight:600;color:var(--ink);}
+.cm-opt.selected .cm-label{color:var(--blue);}
+.presencial-panel{
+  display:none;margin-top:10px;
+  border:1.5px solid var(--border);border-radius:var(--r-sm);overflow:hidden;
+  animation:slideIn 0.3s ease;
+}
+.presencial-panel.show{display:block;}
+.presencial-opt{
+  display:flex;align-items:flex-start;gap:12px;padding:13px 14px;
+  cursor:pointer;transition:background 0.2s;border-bottom:1px solid var(--border);
+  position:relative;
+}
+.presencial-opt:last-child{border-bottom:none;}
+.presencial-opt:hover{background:var(--blue-light);}
+.presencial-opt.selected{background:var(--blue-light);}
+.presencial-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.presencial-opt.selected .presencial-radio{border-color:var(--blue);background:var(--blue);}
+.presencial-radio-dot{width:6px;height:6px;border-radius:50%;background:#fff;transform:scale(0);transition:transform 0.2s;}
+.presencial-opt.selected .presencial-radio-dot{transform:scale(1);}
+.presencial-info{flex:1;}
+.presencial-city{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.presencial-addr{font-size:11px;color:var(--muted);line-height:1.4;}
+.presencial-tag{display:inline-block;font-size:10px;font-weight:500;padding:2px 7px;border-radius:100px;margin-top:4px;}
+.presencial-tag.porto{background:#EEF3FF;color:var(--blue);}
+.presencial-tag.lisboa{background:#FBF5E6;color:var(--gold-mid);}
+.presencial-map-link{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--blue);text-decoration:none;margin-top:4px;margin-bottom:2px;transition:opacity 0.2s;}
+.presencial-map-link:hover{opacity:0.75;text-decoration:underline;}
+.btn-submit{
+  flex:1;padding:13px 20px;border:none;border-radius:var(--r-sm);
+  background:var(--blue);font-family:'Syne',sans-serif;font-size:15px;font-weight:700;
+  letter-spacing:0.03em;color:#fff;cursor:pointer;
+  transition:all 0.2s cubic-bezier(.175,.885,.32,1.275);position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-submit::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,0.1) 0%,transparent 60%);pointer-events:none;}
+.btn-submit:hover{background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,61,165,0.3);}
+.btn-submit.green{background:#25D366;}
+.btn-submit.green:hover{background:#1ebe5c;box-shadow:0 8px 20px rgba(37,211,102,0.3);}
+.btn-submit.red{background:#E0294A;}
+.btn-submit.red:hover{background:#c41f39;box-shadow:0 8px 20px rgba(224,41,74,0.3);}
+
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"><span id="toastEmoji">✨</span><span id="toastMsg">Ótima escolha!</span></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">
+      <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+      <div class="logo-names">
+        <span class="logo-main">Azevedo <span>Seguros</span></span>
+        <span class="logo-sub">Agência exclusiva Ageas Portugal</span>
+      </div>
+    </div>
+    <div class="badge-ageas">🛡️ Ageas</div>
+  </div>
+
+  <!-- ====== SELECTOR ====== -->
+  <div id="selectorScreen">
+    <div class="card">
+      <div class="selector-hero">
+        <div class="hero-eyebrow">📋 Pedido de proposta</div>
+        <h1 class="hero-title">Que seguro pretende?</h1>
+        <p class="hero-sub">Selecione o tipo de cobertura e receba uma proposta personalizada no WhatsApp.</p>
+      </div>
+      <div class="selector-body">
+        <p class="selector-label">Escolha um produto</p>
+        <div class="product-grid">
+
+          <div class="product-card" onclick="openForm('saude')">
+            <div class="pc-icon blue">🏥</div>
+            <div class="pc-body">
+              <div class="pc-title">Seguro de Saúde</div>
+              <div class="pc-desc">Cobertura médica completa para si e para a sua família, sem filas de espera no SNS.</div>
+              <div class="pc-tags">
+                <span class="pc-tag blue">Individual</span>
+                <span class="pc-tag blue">Família</span>
+                <span class="pc-tag blue">Empresa</span>
+              </div>
+            </div>
+            <div class="pc-arrow">→</div>
+          </div>
+
+          <div class="product-card vida" onclick="openForm('vida')">
+            <div class="pc-icon purple">🛡️</div>
+            <div class="pc-body">
+              <div class="pc-title">Seguro de Vida</div>
+              <div class="pc-desc">Proteja o futuro da sua família e complemente a sua reforma com as melhores soluções Ageas.</div>
+              <div class="pc-tags">
+                <span class="pc-tag purple">Ritmo Vida Família</span>
+                <span class="pc-tag purple">Viva Plus</span>
+                <span class="pc-tag gold">Rendimento Flexível</span>
+              </div>
+            </div>
+            <div class="pc-arrow">→</div>
+          </div>
+
+        </div>
+        <div class="selector-footer-note">
+          💬 Após preencher o formulário, a nossa equipa entra em contacto pelo WhatsApp com uma proposta à sua medida.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SAÚDE FORM ====== -->
+  <div class="form-screen" id="saudeForm">
+    <button class="back-home" onclick="goHome()">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Voltar à seleção
+    </button>
+    <div class="card">
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <span class="progress-step-label" id="s_stepLabel">Passo 1 de 4</span>
+          <span class="progress-pct" id="s_stepPct">25%</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="s_progFill" style="width:25%"></div></div>
+        <div class="step-dots" id="s_dots">
+          <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+
+      <!-- S1 -->
+      <div class="step active" id="s_step1">
+        <div class="q-eyebrow">Composição do agregado</div>
+        <h2 class="q-title">Quem vai proteger?</h2>
+        <p class="q-sub">Selecione o grupo que melhor descreve a sua situação</p>
+        <div class="options" id="s_opts1">
+          <div class="opt" data-val="Só eu" data-toast="✨|Ótima decisão de cuidar de si!"><div class="opt-icon-wrap">🧑</div><div class="opt-content"><span class="opt-label">Só eu</span><span class="opt-desc">Cobertura individual</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+          <div class="opt" data-val="Casal (2 adultos)" data-toast="💑|Protejam-se a dois!"><div class="opt-icon-wrap">👫</div><div class="opt-content"><span class="opt-label">Casal</span><span class="opt-desc">2 adultos</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+          <div class="opt" data-val="Família com filhos" data-toast="🏡|A família merece o melhor!"><div class="opt-icon-wrap">👨‍👩‍👧</div><div class="opt-content"><span class="opt-label">Família com filhos</span><span class="opt-desc">Adultos e crianças</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+          <div class="opt" data-val="Empresa / Grupo" data-toast="💼|Excelente para a sua equipa!"><div class="opt-icon-wrap">🏢</div><div class="opt-content"><span class="opt-label">Empresa / Grupo</span><span class="opt-desc">Para colaboradores</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+        </div>
+        <p class="err" id="s_err1">⚠ Selecione uma opção para continuar.</p>
+        <div class="btn-row"><button class="btn-next" onclick="sNext(1)">Continuar →</button></div>
+      </div>
+
+      <!-- S2 -->
+      <div class="step" id="s_step2">
+        <div class="q-eyebrow">Dados dos segurados</div>
+        <h2 class="q-title">Idades de cada pessoa a segurar</h2>
+        <p class="q-sub">Adicione uma entrada por cada membro do agregado</p>
+        <div class="persons-list" id="s_personsList"></div>
+        <button class="add-btn" onclick="sAddPerson()" id="s_addBtn"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar pessoa</button>
+        <p class="err" id="s_err2">⚠ Adicione pelo menos uma pessoa.</p>
+        <div class="btn-row"><button class="btn-back" onclick="sBack(2)">← Voltar</button><button class="btn-next" onclick="sNext(2)">Continuar →</button></div>
+      </div>
+
+      <!-- S3 -->
+      <div class="step" id="s_step3">
+        <div class="q-eyebrow">Orçamento mensal</div>
+        <h2 class="q-title">Quanto pretende investir por mês?</h2>
+        <p class="q-sub">Arraste para selecionar o seu orçamento ideal</p>
+        <div class="range-hero">
+          <div class="range-amount" id="s_rangeAmt">€30</div>
+          <div class="range-period">por pessoa / mês</div>
+          <div class="range-reaction" id="s_rangeReact"></div>
+        </div>
+        <input type="range" id="s_slider" min="10" max="200" value="30" step="5" oninput="sUpdateSlider(this.value)">
+        <div class="range-limits"><span>€10</span><span>€200+</span></div>
+        <div class="btn-row"><button class="btn-back" onclick="sBack(3)">← Voltar</button><button class="btn-next" onclick="sNext(3)">Continuar →</button></div>
+      </div>
+
+      <!-- S4 -->
+      <div class="step" id="s_step4">
+        <div class="q-eyebrow">Última etapa</div>
+        <h2 class="q-title">Já é cliente Ageas?</h2>
+        <p class="q-sub">Clientes atuais têm acesso a condições e descontos exclusivos</p>
+        <div class="options" id="s_opts4">
+          <div class="opt" data-val="Sim, já sou cliente Ageas" data-toast="🎉|Bem-vindo de volta!"><div class="opt-icon-wrap">✅</div><div class="opt-content"><span class="opt-label">Sim, já sou cliente Ageas</span><span class="opt-desc">Tenho outros seguros Ageas</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+          <div class="opt" data-val="Não, sou novo cliente" data-toast="👋|Muito bem-vindo!"><div class="opt-icon-wrap">🆕</div><div class="opt-content"><span class="opt-label">Não, sou novo cliente</span><span class="opt-desc">Primeira vez com a Ageas</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+          <div class="opt" data-val="Não tenho a certeza" data-toast="🤝|Vamos descobrir juntos!"><div class="opt-icon-wrap">🤔</div><div class="opt-content"><span class="opt-label">Não tenho a certeza</span><span class="opt-desc">Preciso de verificar</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+        </div>
+        <p class="err" id="s_err4">⚠ Selecione uma opção para continuar.</p>
+        <div class="divider"></div>
+        <div class="input-group"><label>NOME COMPLETO <span style="color:#C5CCD9">(opcional)</span></label><input type="text" id="s_userName" placeholder="Ex: João Silva"></div>
+        <div class="input-group"><label>TELEFONE <span style="color:#C5CCD9">(opcional)</span></label><input type="tel" id="s_userPhone" placeholder="Ex: 912 345 678"></div>
+        <div class="input-group"><label>EMAIL <span style="color:#C5CCD9">(opcional)</span></label><input type="email" id="s_userEmail" placeholder="Ex: joao@email.com"></div>
+        <div class="input-group"><label>DATA DE NASCIMENTO <span style="color:#C5CCD9">(opcional)</span></label><input type="date" id="s_userDob" max="2010-01-01"></div>
+        <div class="input-group"><label>ATIVIDADE PROFISSIONAL <span style="color:#C5CCD9">(opcional)</span></label><input type="text" id="s_userJob" placeholder="Ex: Enfermeiro, Empresário, Reformado..."></div>
+        <div class="divider"></div>
+        <span class="contact-method-label">COMO PREFERE RECEBER A SUA PROPOSTA?</span>
+        <div class="contact-methods" id="s_contactMethods">
+          <div class="cm-opt selected" data-val="WhatsApp" onclick="pickContact(this,'s_contactMethods','s')"><span class="cm-icon">💬</span><span class="cm-label">WhatsApp</span></div>
+          <div class="cm-opt" data-val="Chamada" onclick="pickContact(this,'s_contactMethods','s')"><span class="cm-icon">📞</span><span class="cm-label">Chamada</span></div>
+          <div class="cm-opt" data-val="Email" onclick="pickContact(this,'s_contactMethods','s')"><span class="cm-icon">✉️</span><span class="cm-label">Email</span></div>
+          <div class="cm-opt" data-val="Presencial" onclick="pickContact(this,'s_contactMethods','s')"><span class="cm-icon">🏢</span><span class="cm-label">Presencial</span></div>
+        </div>
+        <div class="presencial-panel" id="s_presencialPanel">
+          <div class="presencial-opt selected" data-city="Porto" onclick="pickPresencial(this,'s_presencialPanel')" id="s_loc_porto">
+            <div class="presencial-radio"><div class="presencial-radio-dot"></div></div>
+            <div class="presencial-info">
+              <div class="presencial-city">Ageas Icon Douro — Porto</div>
+              <div class="presencial-addr">Rua de Júlio Dinis, 4050-318 Porto<br>Edifício Novo Ageas Icon Douro</div>
+              <a href="https://share.google/tixWfNg1PcCjN46dG" target="_blank" onclick="event.stopPropagation()" class="presencial-map-link">📍 Ver no Google Maps</a>
+              <span class="presencial-tag porto">Porto</span>
+            </div>
+          </div>
+          <div class="presencial-opt" data-city="Lisboa" onclick="pickPresencial(this,'s_presencialPanel')" id="s_loc_lisboa">
+            <div class="presencial-radio"><div class="presencial-radio-dot"></div></div>
+            <div class="presencial-info">
+              <div class="presencial-city">Ageas Edifício Tejo — Lisboa</div>
+              <div class="presencial-addr">Av. Dom João II, 1990-083 Lisboa<br>Edifício Tejo, Parque das Nações</div>
+              <a href="https://share.google/1jbplQbdeKHVEdM5y" target="_blank" onclick="event.stopPropagation()" class="presencial-map-link">📍 Ver no Google Maps</a>
+              <span class="presencial-tag lisboa">Lisboa</span>
+            </div>
+          </div>
+        </div>
+        <p class="err" id="s_errContact">⚠ Selecione um método de contacto.</p>
+        <div class="btn-row"><button class="btn-back" onclick="sBack(4)">← Voltar</button><button class="btn-submit green" id="s_submitBtn" onclick="sSubmit()"><span id="s_submitIcon">🚀</span><span id="s_submitLabel">Enviar pedido de proposta</span></button></div>
+      </div>
+
+      <div class="about-screen" id="s_about">
+        <div class="about-hero"><div class="about-badge">🛡️ Agência Exclusiva Ageas Portugal</div><div class="about-title">Azevedo Seguros<span>por Edgar Azevedo</span></div><p class="about-tagline">Acompanhamento personalizado em cada etapa da sua vida.</p></div>
+        <div class="about-cards">
+          <div class="about-card"><div class="about-card-icon blue">🤝</div><div class="about-card-text"><div class="about-card-title">Acompanhamento individual</div><div class="about-card-desc">Cada cliente tem um gestor dedicado que conhece a sua apólice ao pormenor e está sempre disponível para si.</div></div></div>
+          <div class="about-card"><div class="about-card-icon gold">⏱️</div><div class="about-card-text"><div class="about-card-title">Sem filas de espera</div><div class="about-card-desc">Tratamos de tudo remotamente. Sem idas desnecessárias à agência — a sua comodidade é a nossa prioridade.</div></div></div>
+          <div class="about-card"><div class="about-card-icon green">📋</div><div class="about-card-text"><div class="about-card-title">Gestão total das suas apólices</div><div class="about-card-desc">Desde a contratação à gestão de sinistros — estamos sempre presentes para que nunca esteja sozinho.</div></div></div>
+        </div>
+        <div class="google-row"><div><div class="stars">★★★★★</div><div class="google-sub">Avaliação dos nossos clientes</div></div><div class="google-logo"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>&nbsp;<span style="color:var(--muted);font-size:11px;font-weight:400;">Reviews</span></div></div>
+        <div class="read-confirm"><span style="font-size:20px">👁️</span><div class="read-confirm-text"><strong>Leu até aqui?</strong> Obrigado pela atenção!<br>Confirme que leu as informações sobre a Azevedo Seguros.</div></div>
+        <button class="btn-confirm" onclick="sConfirm()">✅ Sim, li — confirmar pedido!</button>
+      </div>
+
+      <div class="success-screen" id="s_success">
+        <span class="success-confetti">🎉</span>
+        <h2 class="success-greeting" id="s_greet">Obrigado<br><span>pelo seu pedido!</span></h2>
+        <p class="success-msg">Iremos analisar o seu pedido e entrar em contacto em breve com uma proposta personalizada.</p>
+        <div class="welcome-badge">🛡️ Bem-vindo à família <span>&nbsp;Azevedo Seguros</span>&nbsp;· Ageas Portugal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== VIDA FORM ====== -->
+  <div class="form-screen" id="vidaForm">
+    <button class="back-home" onclick="goHome()">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Voltar à seleção
+    </button>
+    <div class="card">
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <span class="progress-step-label" id="v_stepLabel">Passo 1 de 4</span>
+          <span class="progress-pct" id="v_stepPct">25%</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="v_progFill" style="width:25%"></div></div>
+        <div class="step-dots" id="v_dots">
+          <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+
+      <!-- V1: produto -->
+      <div class="step active" id="v_step1">
+        <div class="q-eyebrow">Tipo de produto</div>
+        <h2 class="q-title">Que solução procura?</h2>
+        <p class="q-sub">Escolha o produto que melhor se adapta ao seu objetivo</p>
+        <div class="options" id="v_opts1">
+          <div class="opt" data-val="Ritmo Vida Família" data-toast="🛡️|Proteção completa para a família!">
+            <div class="opt-icon-wrap">👨‍👩‍👧</div>
+            <div class="opt-content">
+              <span class="opt-label">Ritmo Vida Família</span>
+              <span class="opt-desc">Morte, invalidez e dependência — capital até 1.000.000€</span>
+            </div>
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+          </div>
+          <div class="opt" data-val="Viva Plus" data-toast="💪|Cobertura anual renovável!">
+            <div class="opt-icon-wrap">🔄</div>
+            <div class="opt-content">
+              <span class="opt-label">Viva Plus</span>
+              <span class="opt-desc">Renovável até 70 anos — cobre 27 doenças graves (plano Top)</span>
+            </div>
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+          </div>
+          <div class="opt" data-val="Rendimento Flexível" data-toast="📈|Invista na sua reforma!">
+            <div class="opt-icon-wrap">🏦</div>
+            <div class="opt-content">
+              <span class="opt-label">Rendimento Flexível</span>
+              <span class="opt-desc">Fundo de pensões para complementar a reforma — taxa média 1,71%</span>
+            </div>
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+          </div>
+          <div class="opt" data-val="Rendimento Flexível — Mais Valias" data-toast="🏠|Invista sem pagar imposto!">
+            <div class="opt-icon-wrap">🏠</div>
+            <div class="opt-content">
+              <span class="opt-label">Rendimento Flexível — Mais Valias</span>
+              <span class="opt-desc">Invista a venda da sua habitação sem pagar imposto sobre mais-valias</span>
+            </div>
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+          </div>
+        </div>
+
+        <!-- Info cards por produto -->
+        <div class="info-card" id="info_ritmo">
+          <div class="info-card-title">🛡️ Ritmo Vida Família — 3 planos disponíveis</div>
+          <ul>
+            <li>Base e Mais: morte por doença/acidente, invalidez e dependência (IDPAC)</li>
+            <li>Top: adiciona subsídio diário por incapacidade, hospitalização e exoneração de prémios</li>
+            <li>Capital seguro até 1.000.000€</li>
+          </ul>
+        </div>
+        <div class="info-card" id="info_viva">
+          <div class="info-card-title">🔄 Viva Plus — renovável até 70 anos</div>
+          <ul>
+            <li>Capital entre 10.000€ e 200.000€</li>
+            <li>Plano Top: antecipação de 50% do capital em 27 doenças graves (até 65 anos)</li>
+            <li>Pagamento mensal, trimestral ou semestral</li>
+          </ul>
+        </div>
+        <div class="info-card" id="info_rf">
+          <div class="info-card-title">🏦 Rendimento Flexível — fundo de pensões</div>
+          <ul>
+            <li>Perfis: Segurança, Valorização ou Ações</li>
+            <li>Escolhe quando e quanto recebe — flexibilidade total</li>
+            <li>Pode suspender, alterar ou transferir a qualquer momento</li>
+            <li>Taxa média estimada de 1,71%</li>
+          </ul>
+        </div>
+        <div class="info-card" id="info_mv">
+          <div class="info-card-title">🏠 Rendimento Flexível — Mais Valias</div>
+          <ul>
+            <li>Para quem vende a habitação própria e permanente</li>
+            <li>Invista o valor da venda sem pagar imposto de mais-valias imobiliárias</li>
+            <li>Pensão máxima de 7,5% ao ano do valor investido</li>
+          </ul>
+        </div>
+
+        <p class="err" id="v_err1">⚠ Selecione uma opção para continuar.</p>
+        <div class="btn-row"><button class="btn-next" onclick="vNext(1)">Continuar →</button></div>
+      </div>
+
+      <!-- V2: plano (condicional) -->
+      <div class="step" id="v_step2">
+        <div class="q-eyebrow">Nível de cobertura</div>
+        <h2 class="q-title">Qual o plano pretendido?</h2>
+        <p class="q-sub">Cada plano oferece coberturas progressivamente mais completas</p>
+        <div class="options" id="v_opts2">
+          <div class="opt" data-val="Base" data-toast="✅|Cobertura essencial!"><div class="opt-icon-wrap">🥉</div><div class="opt-content"><span class="opt-label">Base</span><span class="opt-desc">Coberturas essenciais — morte e IDPAC</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+          <div class="opt" data-val="Mais" data-toast="⭐|Equilíbrio ideal!"><div class="opt-icon-wrap">🥈</div><div class="opt-content"><span class="opt-label">Mais</span><span class="opt-desc">Base + coberturas reforçadas</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+          <div class="opt" data-val="Top" data-toast="💎|Proteção máxima!"><div class="opt-icon-wrap">🥇</div><div class="opt-content"><span class="opt-label">Top</span><span class="opt-desc">Cobertura total — incapacidade, hospitalização e exoneração</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+        </div>
+        <p class="err" id="v_err2">⚠ Selecione um plano para continuar.</p>
+        <div class="btn-row"><button class="btn-back" onclick="vBack(2)">← Voltar</button><button class="btn-next" onclick="vNext(2)">Continuar →</button></div>
+      </div>
+
+      <!-- V3: dados pessoais -->
+      <div class="step" id="v_step3">
+        <div class="q-eyebrow">Dados pessoais</div>
+        <h2 class="q-title">Os seus dados de contacto</h2>
+        <p class="q-sub">Para lhe enviarmos uma simulação personalizada</p>
+        <div class="persons-list" id="v_personsList"></div>
+        <button class="add-btn" onclick="vAddPerson()" id="v_addBtn"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Adicionar pessoa</button>
+        <p class="err" id="v_err3">⚠ Adicione pelo menos uma pessoa.</p>
+        <div class="btn-row"><button class="btn-back" onclick="vBack(3)">← Voltar</button><button class="btn-next" onclick="vNext(3)">Continuar →</button></div>
+      </div>
+
+      <!-- V4: cliente + contacto -->
+      <div class="step" id="v_step4">
+        <div class="q-eyebrow">Última etapa</div>
+        <h2 class="q-title">Já é cliente Ageas?</h2>
+        <p class="q-sub">Clientes atuais têm acesso a condições e descontos exclusivos</p>
+        <div class="options" id="v_opts4">
+          <div class="opt" data-val="Sim, já sou cliente Ageas" data-toast="🎉|Bem-vindo de volta!"><div class="opt-icon-wrap">✅</div><div class="opt-content"><span class="opt-label">Sim, já sou cliente Ageas</span><span class="opt-desc">Tenho outros seguros Ageas</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+          <div class="opt" data-val="Não, sou novo cliente" data-toast="👋|Muito bem-vindo!"><div class="opt-icon-wrap">🆕</div><div class="opt-content"><span class="opt-label">Não, sou novo cliente</span><span class="opt-desc">Primeira vez com a Ageas</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+          <div class="opt" data-val="Não tenho a certeza" data-toast="🤝|Vamos descobrir juntos!"><div class="opt-icon-wrap">🤔</div><div class="opt-content"><span class="opt-label">Não tenho a certeza</span><span class="opt-desc">Preciso de verificar</span></div><div class="opt-radio"><div class="opt-radio-dot"></div></div></div>
+        </div>
+        <p class="err" id="v_err4">⚠ Selecione uma opção para continuar.</p>
+        <div class="divider"></div>
+        <div class="input-group"><label>NOME COMPLETO <span style="color:#C5CCD9">(opcional)</span></label><input type="text" id="v_userName" placeholder="Ex: João Silva"></div>
+        <div class="input-group"><label>TELEFONE <span style="color:#C5CCD9">(opcional)</span></label><input type="tel" id="v_userPhone" placeholder="Ex: 912 345 678"></div>
+        <div class="input-group"><label>EMAIL <span style="color:#C5CCD9">(opcional)</span></label><input type="email" id="v_userEmail" placeholder="Ex: joao@email.com"></div>
+        <div class="input-group"><label>DATA DE NASCIMENTO <span style="color:#C5CCD9">(opcional)</span></label><input type="date" id="v_userDob" max="2010-01-01"></div>
+        <div class="input-group"><label>ATIVIDADE PROFISSIONAL <span style="color:#C5CCD9">(opcional)</span></label><input type="text" id="v_userJob" placeholder="Ex: Enfermeiro, Empresário, Reformado..."></div>
+        <div class="divider"></div>
+        <span class="contact-method-label">COMO PREFERE RECEBER A SUA PROPOSTA?</span>
+        <div class="contact-methods" id="v_contactMethods">
+          <div class="cm-opt selected" data-val="WhatsApp" onclick="pickContact(this,'v_contactMethods','v')"><span class="cm-icon">💬</span><span class="cm-label">WhatsApp</span></div>
+          <div class="cm-opt" data-val="Chamada" onclick="pickContact(this,'v_contactMethods','v')"><span class="cm-icon">📞</span><span class="cm-label">Chamada</span></div>
+          <div class="cm-opt" data-val="Email" onclick="pickContact(this,'v_contactMethods','v')"><span class="cm-icon">✉️</span><span class="cm-label">Email</span></div>
+          <div class="cm-opt" data-val="Presencial" onclick="pickContact(this,'v_contactMethods','v')"><span class="cm-icon">🏢</span><span class="cm-label">Presencial</span></div>
+        </div>
+        <div class="presencial-panel" id="v_presencialPanel">
+          <div class="presencial-opt selected" data-city="Porto" onclick="pickPresencial(this,'v_presencialPanel')" id="v_loc_porto">
+            <div class="presencial-radio"><div class="presencial-radio-dot"></div></div>
+            <div class="presencial-info">
+              <div class="presencial-city">Ageas Icon Douro — Porto</div>
+              <div class="presencial-addr">Rua de Júlio Dinis, 4050-318 Porto<br>Edifício Novo Ageas Icon Douro</div>
+              <a href="https://share.google/tixWfNg1PcCjN46dG" target="_blank" onclick="event.stopPropagation()" class="presencial-map-link">📍 Ver no Google Maps</a>
+              <span class="presencial-tag porto">Porto</span>
+            </div>
+          </div>
+          <div class="presencial-opt" data-city="Lisboa" onclick="pickPresencial(this,'v_presencialPanel')" id="v_loc_lisboa">
+            <div class="presencial-radio"><div class="presencial-radio-dot"></div></div>
+            <div class="presencial-info">
+              <div class="presencial-city">Ageas Edifício Tejo — Lisboa</div>
+              <div class="presencial-addr">Av. Dom João II, 1990-083 Lisboa<br>Edifício Tejo, Parque das Nações</div>
+              <a href="https://share.google/1jbplQbdeKHVEdM5y" target="_blank" onclick="event.stopPropagation()" class="presencial-map-link">📍 Ver no Google Maps</a>
+              <span class="presencial-tag lisboa">Lisboa</span>
+            </div>
+          </div>
+        </div>
+        <p class="err" id="v_errContact">⚠ Selecione um método de contacto.</p>
+        <div class="btn-row"><button class="btn-back" onclick="vBack(4)">← Voltar</button><button class="btn-submit green" id="v_submitBtn" onclick="vSubmit()"><svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span id="v_submitIcon">🚀</span><span id="v_submitLabel">Enviar pedido de proposta</span></button></div>
+      </div>
+
+      <div class="about-screen" id="v_about">
+        <div class="about-hero"><div class="about-badge">🛡️ Agência Exclusiva Ageas Portugal</div><div class="about-title">Azevedo Seguros<span>por Edgar Azevedo</span></div><p class="about-tagline">Acompanhamento personalizado em cada etapa da sua vida.</p></div>
+        <div class="about-cards">
+          <div class="about-card"><div class="about-card-icon blue">🤝</div><div class="about-card-text"><div class="about-card-title">Acompanhamento individual</div><div class="about-card-desc">Cada cliente tem um gestor dedicado que conhece a sua apólice ao pormenor e está sempre disponível para si.</div></div></div>
+          <div class="about-card"><div class="about-card-icon gold">⏱️</div><div class="about-card-text"><div class="about-card-title">Sem filas de espera</div><div class="about-card-desc">Tratamos de tudo remotamente. Sem idas desnecessárias à agência — a sua comodidade é a nossa prioridade.</div></div></div>
+          <div class="about-card"><div class="about-card-icon green">📋</div><div class="about-card-text"><div class="about-card-title">Gestão total das suas apólices</div><div class="about-card-desc">Desde a contratação à gestão de sinistros — estamos sempre presentes para que nunca esteja sozinho.</div></div></div>
+        </div>
+        <div class="google-row"><div><div class="stars">★★★★★</div><div class="google-sub">Avaliação dos nossos clientes</div></div><div class="google-logo"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>&nbsp;<span style="color:var(--muted);font-size:11px;font-weight:400;">Reviews</span></div></div>
+        <div class="read-confirm"><span style="font-size:20px">👁️</span><div class="read-confirm-text"><strong>Leu até aqui?</strong> Obrigado pela atenção!<br>Confirme que leu as informações sobre a Azevedo Seguros.</div></div>
+        <button class="btn-confirm" onclick="vConfirm()">✅ Sim, li — confirmar pedido!</button>
+      </div>
+
+      <div class="success-screen" id="v_success">
+        <span class="success-confetti">🎉</span>
+        <h2 class="success-greeting" id="v_greet">Obrigado<br><span>pelo seu pedido!</span></h2>
+        <p class="success-msg">Iremos analisar o seu pedido e entrar em contacto em breve com uma proposta personalizada.</p>
+        <div class="welcome-badge">🛡️ Bem-vindo à família <span>&nbsp;Azevedo Seguros</span>&nbsp;· Ageas Portugal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-item"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>Dados protegidos</div>
+    <div class="footer-item"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>Ageas Portugal</div>
+    <div class="footer-item"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Sem compromisso</div>
+  </div>
+</div>
+
+<script>
+// ---- shared ----
+const avatars=['🧑','👩','🧒','👴','👵','🧔','👦','👧'];
+let toastTimer=null;
+
+function showToast(e,m){
+  const t=document.getElementById('toast');
+  document.getElementById('toastEmoji').textContent=e;
+  document.getElementById('toastMsg').textContent=m;
+  t.classList.add('show');clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+function addRipple(el,e){
+  const rect=el.getBoundingClientRect(),r=document.createElement('span');
+  r.className='ripple';const size=Math.max(rect.width,rect.height)*2;
+  r.style.cssText=`width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px`;
+  el.appendChild(r);setTimeout(()=>r.remove(),600);
+}
+function pickOpt(el,groupId,stateKey,ev){
+  addRipple(el,ev);
+  document.querySelectorAll('#'+groupId+' .opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  const [em,ms]=(el.dataset.toast||'✨|Ótima escolha!').split('|');
+  showToast(em,ms);
+  return el.dataset.val;
+}
+
+function sendLeadEmail(data){
+  const hora = new Date().toLocaleString('pt-PT');
+  fetch('https://formspree.io/f/mykbeopp', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+    body: JSON.stringify({
+      _subject:          '🏥 Novo Lead – ' + (data.tipoSeguro||'Seguro') + (data.nome?' – '+data.nome:''),
+      'Data e Hora':     hora,
+      'Tipo de Seguro':  data.tipoSeguro  || '—',
+      'Grupo':           data.grupo       || '—',
+      'Idades':          data.idades      || '—',
+      'Orçamento':       data.orcamento   || '—',
+      'Produto Vida':    data.produtoVida || '—',
+      'Plano':           data.plano       || '—',
+      'Cliente Ageas':   data.clienteAgeas|| '—',
+      'Método Contacto': data.metodo      || '—',
+      'Local Presencial':data.local       || '—',
+      'Nome':            data.nome        || '—',
+      'Telefone':        data.telefone    || '—',
+      'Email Cliente':   data.email       || '—',
+      'Data Nascimento': data.dataNasc    || '—',
+      'Profissão':       data.profissao   || '—'
+    })
+  })
+  .then(r=>r.json())
+  .then(r=>console.log('Formspree ok:', r))
+  .catch(e=>console.warn('Formspree erro:', e));
+}
+
+function goHome(){
+  document.getElementById('selectorScreen').style.display='block';
+  document.getElementById('saudeForm').classList.remove('active');
+  document.getElementById('vidaForm').classList.remove('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function pickContact(el, groupId, prefix){
+  document.querySelectorAll('#'+groupId+' .cm-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  const val = el.dataset.val;
+  const btnId = prefix+'_submitBtn';
+  const iconId = prefix+'_submitIcon';
+  const labelId = prefix+'_submitLabel';
+  const btn = document.getElementById(btnId);
+  const icon = document.getElementById(iconId);
+  const label = document.getElementById(labelId);
+  const panel = document.getElementById(prefix+'_presencialPanel');
+  if(panel) panel.classList.toggle('show', val==='Presencial');
+  if(val==='WhatsApp'){
+    btn.className='btn-submit green';
+    icon.textContent='🚀';label.textContent='Enviar pedido de proposta';
+  } else if(val==='Chamada'){
+    btn.className='btn-submit green';
+    icon.textContent='🚀';label.textContent='Enviar pedido de proposta';
+  } else if(val==='Presencial'){
+    btn.className='btn-submit green';
+    icon.textContent='🚀';label.textContent='Enviar pedido de proposta';
+  } else {
+    btn.className='btn-submit green';
+    icon.textContent='🚀';label.textContent='Enviar pedido de proposta';
+  }
+}
+
+function pickPresencial(el, panelId){
+  document.querySelectorAll('#'+panelId+' .presencial-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function openForm(type){
+  document.getElementById('selectorScreen').style.display='none';
+  if(type==='saude'){
+    document.getElementById('saudeForm').classList.add('active');
+  } else {
+    document.getElementById('vidaForm').classList.add('active');
+    vInitStep1();
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ---- SAÚDE ----
+const sState={q1:null,persons:[],q3:30,q4:null};
+let sPersonCount=0;
+
+document.querySelectorAll('#s_opts1 .opt, #s_opts4 .opt').forEach(opt=>{
+  opt.addEventListener('click',function(e){
+    const g=this.closest('.options').id;
+    const v=pickOpt(this,g,null,e);
+    if(g==='s_opts1'){sState.q1=v;document.getElementById('s_err1').classList.remove('show');}
+    if(g==='s_opts4'){sState.q4=v;document.getElementById('s_err4').classList.remove('show');}
+  });
+});
+
+function sAddPerson(){
+  sPersonCount++;
+  const id='sp'+sPersonCount+'_'+Date.now();
+  const emoji=avatars[(sPersonCount-1)%avatars.length];
+  const label=sPersonCount===1?'Titular':'Pessoa '+sPersonCount;
+  const div=document.createElement('div');
+  div.className='person-row';div.id=id;div.dataset.age='35';
+  div.innerHTML=`<div class="person-avatar">${emoji}</div><div class="person-info"><div class="person-name">${label}</div><div class="person-age-label" id="slbl_${id}">35 anos</div></div><div class="age-stepper"><button class="age-btn" onclick="sChangeAge('${id}',-1)">−</button><div class="age-val" id="sav_${id}">35</div><button class="age-btn" onclick="sChangeAge('${id}',1)">+</button></div>${sPersonCount>1?`<button class="remove-btn" onclick="sRemovePerson('${id}')">✕</button>`:''}`;
+  document.getElementById('s_personsList').appendChild(div);
+  if(sPersonCount>=8)document.getElementById('s_addBtn').style.display='none';
+  sUpdatePersons();
+}
+function sRemovePerson(id){const el=document.getElementById(id);el.style.transition='all 0.25s';el.style.opacity='0';el.style.transform='translateX(20px)';setTimeout(()=>{el.remove();sPersonCount--;document.getElementById('s_addBtn').style.display='flex';sUpdatePersons();},250);}
+function sChangeAge(id,d){const row=document.getElementById(id);let a=parseInt(row.dataset.age)+d;a=Math.max(0,Math.min(99,a));row.dataset.age=a;const av=document.getElementById('sav_'+id);av.textContent=a;av.classList.remove('bump');void av.offsetWidth;av.classList.add('bump');document.getElementById('slbl_'+id).textContent=a+' anos';sUpdatePersons();}
+function sUpdatePersons(){sState.persons=Array.from(document.querySelectorAll('#s_personsList .person-row')).map(r=>({label:r.querySelector('.person-name').textContent,age:parseInt(r.dataset.age)}));}
+
+const sReactions=[{max:25,emoji:'💡',label:'Económico',bg:'#F3F4F6',col:'#6B7A99'},{max:50,emoji:'👍',label:'Bom equilíbrio',bg:'#EEF3FF',col:'#003DA5'},{max:80,emoji:'⭐',label:'Boa cobertura',bg:'#E6F7F1',col:'#00A86B'},{max:120,emoji:'🏆',label:'Cobertura premium',bg:'#FBF5E6',col:'#C9A84C'},{max:999,emoji:'💎',label:'Cobertura total',bg:'#FFF0F3',col:'#E0294A'}];
+function sUpdateSlider(val){sState.q3=parseInt(val);const el=document.getElementById('s_rangeAmt');el.textContent=val>=200?'€200+':'€'+val;el.style.animation='none';void el.offsetWidth;el.style.animation='popIn 0.25s ease';const pct=((val-10)/190)*100;document.getElementById('s_slider').style.background=`linear-gradient(90deg,var(--blue) ${pct}%,var(--border) ${pct}%)`;const r=sReactions.find(x=>val<=x.max)||sReactions[sReactions.length-1];const re=document.getElementById('s_rangeReact');re.textContent=r.emoji+' '+r.label;re.style.background=r.bg;re.style.color=r.col;re.classList.add('show');}
+
+function sUpdateDots(n,total){
+  document.querySelectorAll('#s_dots .dot').forEach((d,i)=>{d.className='dot';if(i<n-1)d.classList.add('done');else if(i===n-1)d.classList.add('active');});
+  document.getElementById('s_progFill').style.width=(n/total*100)+'%';
+  document.getElementById('s_stepLabel').textContent='Passo '+n+' de '+total;
+  document.getElementById('s_stepPct').textContent=Math.round(n/total*100)+'%';
+}
+function sShowStep(n){document.querySelectorAll('#saudeForm .step').forEach(s=>s.classList.remove('active'));const s=document.getElementById('s_step'+n);if(s)s.classList.add('active');sUpdateDots(n,4);window.scrollTo({top:0,behavior:'smooth'});}
+function sNext(from){
+  if(from===1){if(!sState.q1){document.getElementById('s_err1').classList.add('show');return;}if(sState.persons.length===0){sAddPerson();if(sState.q1==='Casal (2 adultos)')sAddPerson();if(sState.q1==='Família com filhos'){sAddPerson();sAddPerson();}}sShowStep(2);}  
+  else if(from===2){sUpdatePersons();if(sState.persons.length===0){document.getElementById('s_err2').classList.add('show');return;}sShowStep(3);sUpdateSlider(30);}
+  else if(from===3){sShowStep(4);}
+}
+function sBack(from){sShowStep(from-1);}
+function sSubmit(){
+  if(!sState.q4){document.getElementById('s_err4').classList.add('show');return;}
+  const contactMethod = (document.querySelector('#s_contactMethods .cm-opt.selected')||{}).dataset||{};
+  const method = contactMethod.val || 'WhatsApp';
+  const nome=document.getElementById('s_userName').value.trim();
+  const tel=document.getElementById('s_userPhone').value.trim();
+  const email=document.getElementById('s_userEmail').value.trim();
+  const dob=document.getElementById('s_userDob').value;
+  const job=document.getElementById('s_userJob').value.trim();
+  const orc=sState.q3>=200?'€200+/mês':'€'+sState.q3+'/mês';
+  let pessoas=sState.persons.map(p=>`   • ${p.label}: ${p.age} anos`).join('\n');
+  let msg='🏥 *Novo Lead – Seguro de Saúde*\n*Azevedo Seguros · Ageas Portugal*\n\n';
+  msg+='👥 *Grupo:* '+sState.q1+'\n🎂 *Idades:*\n'+pessoas+'\n💰 *Orçamento:* '+orc+'\n✅ *Cliente Ageas:* '+sState.q4+'\n';
+  msg+='📬 *Método preferido:* '+method+'\n';
+  if(nome)msg+='📝 *Nome:* '+nome+'\n';
+  if(tel)msg+='📞 *Telefone:* '+tel+'\n';
+  if(email)msg+='✉️ *Email:* '+email+'\n';
+  if(dob)msg+='🎂 *Data de nascimento:* '+dob.split('-').reverse().join('/')+'\n';
+  if(job)msg+='💼 *Atividade profissional:* '+job+'\n';
+  msg+='\n_Formulário Azevedo Seguros_';
+  let localStr='';
+  if(method==='Presencial'){
+    const selLoc=document.querySelector('#s_presencialPanel .presencial-opt.selected');
+    localStr=selLoc?selLoc.dataset.city+' ('+selLoc.querySelector('.presencial-city').textContent+')':'Porto';
+    msg+='🏢 *Local pretendido:* '+localStr+'\n';
+  }
+  sendLeadEmail({
+    tipoSeguro:'Seguro de Saúde',grupo:sState.q1,
+    idades:sState.persons.map(p=>p.label+': '+p.age+' anos').join(', '),
+    orcamento:orc,produtoVida:'',plano:'',clienteAgeas:sState.q4,
+    metodo:method,local:localStr||'',nome:nome,telefone:tel,email:email,
+    dataNasc:dob?dob.split('-').reverse().join('/'):'',profissao:job
+  });
+  document.querySelectorAll('#saudeForm .step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s_about').classList.add('active');
+  document.getElementById('s_progFill').style.width='90%';
+  document.getElementById('s_stepLabel').textContent='Quase lá!';document.getElementById('s_stepPct').textContent='90%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function sConfirm(){
+  const nome=document.getElementById('s_userName').value.trim();
+  const fn=nome?nome.split(' ')[0]:'';
+  const g=document.getElementById('s_greet');
+  if(fn){const t=fn.toLowerCase().slice(-1)==='a'?'Sra.':'Sr.';g.innerHTML=`Obrigado,<br><span>${t} ${fn}!</span>`;}
+  document.getElementById('s_about').classList.remove('active');
+  document.getElementById('s_success').classList.add('active');
+  document.getElementById('s_progFill').style.width='100%';
+  document.getElementById('s_stepLabel').textContent='Concluído ✓';document.getElementById('s_stepPct').textContent='100%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ---- VIDA ----
+const vState={q1:null,q2:null,persons:[],q4:null};
+let vPersonCount=0;
+const vNeedsPlano=['Ritmo Vida Família','Viva Plus'];
+
+function vInitStep1(){
+  document.querySelectorAll('#v_opts1 .opt, #v_opts2 .opt, #v_opts4 .opt').forEach(opt=>{
+    if(!opt._vBound){
+      opt._vBound=true;
+      opt.addEventListener('click',function(e){
+        const g=this.closest('.options').id;
+        const v=pickOpt(this,g,null,e);
+        if(g==='v_opts1'){
+          vState.q1=v;document.getElementById('v_err1').classList.remove('show');
+          ['info_ritmo','info_viva','info_rf','info_mv'].forEach(id=>document.getElementById(id).classList.remove('show'));
+          const map={'Ritmo Vida Família':'info_ritmo','Viva Plus':'info_viva','Rendimento Flexível':'info_rf','Rendimento Flexível — Mais Valias':'info_mv'};
+          if(map[v])document.getElementById(map[v]).classList.add('show');
+        }
+        if(g==='v_opts2'){vState.q2=v;document.getElementById('v_err2').classList.remove('show');}
+        if(g==='v_opts4'){vState.q4=v;document.getElementById('v_err4').classList.remove('show');}
+      });
+    }
+  });
+}
+
+function vAddPerson(){
+  vPersonCount++;
+  const id='vp'+vPersonCount+'_'+Date.now();
+  const emoji=avatars[(vPersonCount-1)%avatars.length];
+  const label=vPersonCount===1?'Titular':'Pessoa '+vPersonCount;
+  const div=document.createElement('div');
+  div.className='person-row';div.id=id;div.dataset.age='40';
+  div.innerHTML=`<div class="person-avatar">${emoji}</div><div class="person-info"><div class="person-name">${label}</div><div class="person-age-label" id="vlbl_${id}">40 anos</div></div><div class="age-stepper"><button class="age-btn" onclick="vChangeAge('${id}',-1)">−</button><div class="age-val" id="vav_${id}">40</div><button class="age-btn" onclick="vChangeAge('${id}',1)">+</button></div>${vPersonCount>1?`<button class="remove-btn" onclick="vRemovePerson('${id}')">✕</button>`:''}`;
+  document.getElementById('v_personsList').appendChild(div);
+  if(vPersonCount>=4)document.getElementById('v_addBtn').style.display='none';
+  vUpdatePersons();
+}
+function vRemovePerson(id){const el=document.getElementById(id);el.style.transition='all 0.25s';el.style.opacity='0';el.style.transform='translateX(20px)';setTimeout(()=>{el.remove();vPersonCount--;document.getElementById('v_addBtn').style.display='flex';vUpdatePersons();},250);}
+function vChangeAge(id,d){const row=document.getElementById(id);let a=parseInt(row.dataset.age)+d;a=Math.max(18,Math.min(75,a));row.dataset.age=a;const av=document.getElementById('vav_'+id);av.textContent=a;av.classList.remove('bump');void av.offsetWidth;av.classList.add('bump');document.getElementById('vlbl_'+id).textContent=a+' anos';vUpdatePersons();}
+function vUpdatePersons(){vState.persons=Array.from(document.querySelectorAll('#v_personsList .person-row')).map(r=>({label:r.querySelector('.person-name').textContent,age:parseInt(r.dataset.age)}));}
+
+function vUpdateDots(n,total){
+  document.querySelectorAll('#v_dots .dot').forEach((d,i)=>{d.className='dot';if(i<n-1)d.classList.add('done');else if(i===n-1)d.classList.add('active');});
+  document.getElementById('v_progFill').style.width=(n/total*100)+'%';
+  document.getElementById('v_stepLabel').textContent='Passo '+n+' de '+total;
+  document.getElementById('v_stepPct').textContent=Math.round(n/total*100)+'%';
+}
+function vShowStep(n){document.querySelectorAll('#vidaForm .step').forEach(s=>s.classList.remove('active'));const s=document.getElementById('v_step'+n);if(s)s.classList.add('active');vUpdateDots(n,4);window.scrollTo({top:0,behavior:'smooth'});}
+function vNext(from){
+  if(from===1){
+    if(!vState.q1){document.getElementById('v_err1').classList.add('show');return;}
+    if(vNeedsPlano.includes(vState.q1)){vShowStep(2);}
+    else{vState.q2='N/A';if(vState.persons.length===0)vAddPerson();vShowStep(3);}
+  } else if(from===2){
+    if(!vState.q2){document.getElementById('v_err2').classList.add('show');return;}
+    if(vState.persons.length===0)vAddPerson();vShowStep(3);
+  } else if(from===3){
+    vUpdatePersons();if(vState.persons.length===0){document.getElementById('v_err3').classList.add('show');return;}vShowStep(4);
+  }
+}
+function vBack(from){
+  if(from===3&&vState.q2==='N/A'){vShowStep(1);}
+  else{vShowStep(from-1);}
+}
+function vSubmit(){
+  if(!vState.q4){document.getElementById('v_err4').classList.add('show');return;}
+  const contactMethod = (document.querySelector('#v_contactMethods .cm-opt.selected')||{}).dataset||{};
+  const method = contactMethod.val || 'WhatsApp';
+  const nome=document.getElementById('v_userName').value.trim();
+  const tel=document.getElementById('v_userPhone').value.trim();
+  const email=document.getElementById('v_userEmail').value.trim();
+  const dob=document.getElementById('v_userDob').value;
+  const job=document.getElementById('v_userJob').value.trim();
+  let pessoas=vState.persons.map(p=>`   • ${p.label}: ${p.age} anos`).join('\n');
+  let msg='🛡️ *Novo Lead – Seguro de Vida*\n*Azevedo Seguros · Ageas Portugal*\n\n';
+  msg+='📦 *Produto:* '+vState.q1+'\n';
+  if(vState.q2&&vState.q2!=='N/A')msg+='⭐ *Plano:* '+vState.q2+'\n';
+  msg+='🎂 *Idades:*\n'+pessoas+'\n✅ *Cliente Ageas:* '+vState.q4+'\n';
+  msg+='📬 *Método preferido:* '+method+'\n';
+  if(nome)msg+='📝 *Nome:* '+nome+'\n';
+  if(tel)msg+='📞 *Telefone:* '+tel+'\n';
+  if(email)msg+='✉️ *Email:* '+email+'\n';
+  if(dob)msg+='🎂 *Data de nascimento:* '+dob.split('-').reverse().join('/')+'\n';
+  if(job)msg+='💼 *Atividade profissional:* '+job+'\n';
+  msg+='\n_Formulário Azevedo Seguros_';
+  let vlocalStr='';
+  if(method==='Presencial'){
+    const vselLoc=document.querySelector('#v_presencialPanel .presencial-opt.selected');
+    vlocalStr=vselLoc?vselLoc.dataset.city+' ('+vselLoc.querySelector('.presencial-city').textContent+')':'Porto';
+    msg+='🏢 *Local pretendido:* '+vlocalStr+'\n';
+  }
+  sendLeadEmail({
+    tipoSeguro:'Seguro de Vida',grupo:'',
+    idades:vState.persons.map(p=>p.label+': '+p.age+' anos').join(', '),
+    orcamento:'',produtoVida:vState.q1,
+    plano:vState.q2&&vState.q2!=='N/A'?vState.q2:'',
+    clienteAgeas:vState.q4,metodo:method,local:vlocalStr||'',
+    nome:nome,telefone:tel,email:email,
+    dataNasc:dob?dob.split('-').reverse().join('/'):'',profissao:job
+  });
+  document.querySelectorAll('#vidaForm .step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('v_about').classList.add('active');
+  document.getElementById('v_progFill').style.width='90%';
+  document.getElementById('v_stepLabel').textContent='Quase lá!';document.getElementById('v_stepPct').textContent='90%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function vConfirm(){
+  const nome=document.getElementById('v_userName').value.trim();
+  const fn=nome?nome.split(' ')[0]:'';
+  const g=document.getElementById('v_greet');
+  if(fn){const t=fn.toLowerCase().slice(-1)==='a'?'Sra.':'Sr.';g.innerHTML=`Obrigado,<br><span>${t} ${fn}!</span>`;}
+  document.getElementById('v_about').classList.remove('active');
+  document.getElementById('v_success').classList.add('active');
+  document.getElementById('v_progFill').style.width='100%';
+  document.getElementById('v_stepLabel').textContent='Concluído ✓';document.getElementById('v_stepPct').textContent='100%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
